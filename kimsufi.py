@@ -33,7 +33,7 @@ def main():
                                                     response.message)
         except Exception as e:
             print "Error calling API: %s" % str(e)
-        time.sleep(30)
+        time.sleep(10)
 
 
 if __name__ == '__main__':
