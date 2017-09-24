@@ -51,3 +51,6 @@ Regions:
     "sbg": "Strasbourg, France (Central Europe)",
     "par": "Paris, France"
 }
+
+## Credits
+Michel Casabianca
