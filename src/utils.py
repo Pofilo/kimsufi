@@ -19,8 +19,9 @@ import sys
 from logger import log, ERROR, WARN, INFO, DEBUG
 
 defaultConfigPath = '../config/kimsufi.conf'
-sectionDefault = 'DEFAULT'
+sectionDefaultName = 'GENERAL'
 apiUrlName = 'API_URL'
+sectionZonesName = 'ZONES'
 idServerName = 'ID_SERVER'
 sectionSMSName = 'SMS'
 sectionEmailName = 'EMAIL'
@@ -54,9 +55,10 @@ def checkConfig(config):
 		and not isConfigSection(config, sectionTelegramName)):
 		log(ERROR, 'No section of notification found in the config file')
 		sys.exit(1)
-	# Check the mandatories fields
-	checkConfigKey(config, sectionDefault, apiUrlName)
-	checkConfigKey(config, sectionDefault, idServerName)
+	# Check the mandatories keys and sections
+	checkConfigSection(config, sectionZonesName)
+	checkConfigKey(config, sectionDefaultName, apiUrlName)
+	checkConfigKey(config, sectionDefaultName, idServerName)
 
 def isConfigSection(config, section):
 	if config.has_section(section):
@@ -69,6 +71,11 @@ def isConfigKey(config, section, key):
 		return True
 	else:
 		return False
+
+def checkConfigSection(config, section):
+	if not isConfigSection(config, section):
+		log(ERROR, 'No section "{}" in config file'.format(section))
+		sys.exit(1)
 
 def checkConfigKey(config, section, key):
 	if not isConfigKey(config, section, key):

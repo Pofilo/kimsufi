@@ -22,9 +22,6 @@ import argparse
 import utils
 from logger import log, ERROR, WARN, INFO, DEBUG
 
-ZONES = set(["gra", "rbx", "sbg", "par"])
-
-
 def main():
 	log(INFO, '--------------------')
 
@@ -35,8 +32,11 @@ def main():
 
 	# Open conf and load parameters
 	config, configPath = utils.openAndLoadConfig(args)
-	apiUrl = config.get(utils.sectionDefault, utils.apiUrlName)
-	idServer = config.get(utils.sectionDefault, utils.idServerName)
+	apiUrl = config.get(utils.sectionDefaultName, utils.apiUrlName)
+	idServer = config.get(utils.sectionDefaultName, utils.idServerName)
+	zonesDesired = set()
+	for zone in set(config.items(utils.sectionZonesName)):
+		zonesDesired.add(zone[1])
 
 	log(INFO, 'Calling kimsufi API...')
 	try:
@@ -45,7 +45,7 @@ def main():
 			struct = json.loads(response.body)
 			for item in struct['answer']['availability']:
 				zones = [z['zone'] for z in item['zones'] if z['availability'] not in ('unavailable', 'unknown')]
-				if set(zones).intersection(ZONES) and item['reference'] == idServer:
+				if set(zones).intersection(zonesDesired) and item['reference'] == idServer:
 					log(INFO, 'Found available server, sending sms...')
 					r = requests.get("PUT YOUR FREE URL HERE")
 		else:
