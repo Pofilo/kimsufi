@@ -23,7 +23,7 @@ sectionDefaultName = 'GENERAL'
 apiUrlName = 'API_URL'
 sectionZonesName = 'ZONES'
 idServerName = 'ID_SERVER'
-sectionSMSName = 'SMS'
+sectionHTTPRequestName = 'HTTP_REQUEST'
 sectionEmailName = 'EMAIL'
 sectionTelegramName = 'TELEGRAM'
 
@@ -50,7 +50,7 @@ def openAndLoadConfig(args):
 
 def checkConfig(config):
 	# Check at least a section of notification exists
-	if (not isConfigSection(config, sectionSMSName) 
+	if (not isConfigSection(config, sectionHTTPRequestName) 
 		and not isConfigSection(config, sectionEmailName) 
 		and not isConfigSection(config, sectionTelegramName)):
 		log(ERROR, 'No section of notification found in the config file')
