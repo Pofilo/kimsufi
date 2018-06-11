@@ -38,7 +38,7 @@ def main():
 	for zone in set(config.items(utils.sectionZonesName)):
 		zonesDesired.add(zone[1])
 
-	log(INFO, 'Calling kimsufi API...')
+	log(INFO, 'Calling kimsufi API on "{}"'.format(apiUrl))
 	try:
 		response = http1.get(apiUrl)
 		if response.status == 200:
@@ -46,8 +46,16 @@ def main():
 			for item in struct['answer']['availability']:
 				zones = [z['zone'] for z in item['zones'] if z['availability'] not in ('unavailable', 'unknown')]
 				if set(zones).intersection(zonesDesired) and item['reference'] == idServer:
-					log(INFO, 'Found available server, sending sms...')
-					r = requests.get("PUT YOUR FREE URL HERE")
+					log(INFO, 'Found available server, sending notifications...')
+					if utils.isConfigSection(config, utils.sectionHTTPRequestName):
+						log(WARN, "HTTP Request is not implemented yet")
+						# TODO
+					if utils.isConfigSection(config, utils.sectionEmailName):
+						log(WARN, "Email is not implemented yet")
+						# TODO
+					if utils.isConfigSection(config, utils.sectionTelegramName):
+						log(WARN, "Telegram is not implemented yet")
+						# TODO
 		else:
 			log(ERROR, 'Calling API: "{}" "{}"'.format(response.status, response.message))
 	except Exception as e:
