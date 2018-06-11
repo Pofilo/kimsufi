@@ -53,8 +53,7 @@ def checkConfig(config):
 	if (not isConfigSection(config, sectionHTTPRequestName) 
 		and not isConfigSection(config, sectionEmailName) 
 		and not isConfigSection(config, sectionTelegramName)):
-		log(ERROR, 'No section of notification found in the config file')
-		sys.exit(1)
+		log(WARN, 'No section of notification found in the config file, just logs will be done.')
 	# Check the mandatories keys and sections
 	checkConfigSection(config, sectionZonesName)
 	checkConfigKey(config, sectionDefaultName, apiUrlName)
