@@ -49,8 +49,9 @@ def main():
 				if set(zones).intersection(zonesDesired) and item['reference'] == idServer:
 					log(INFO, 'Found available server, sending notifications...')
 					if utils.isConfigSection(config, utils.sectionHTTPRequestName):
-						log(WARN, "HTTP Request is not implemented yet")
-						# TODO
+						log(DEBUG, "Sending HTTP request")
+						request = config.get(utils.sectionHTTPRequestName, utils.HTTPRequest)
+						r = requests.get(request)
 					if utils.isConfigSection(config, utils.sectionEmailName):
 						log(WARN, "Email is not implemented yet")
 						# TODO
