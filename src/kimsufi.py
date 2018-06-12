@@ -18,6 +18,7 @@ import time
 import http1
 import requests
 import argparse
+import telegram
 
 import utils
 from logger import log, ERROR, WARN, INFO, DEBUG
@@ -54,8 +55,11 @@ def main():
 						log(WARN, "Email is not implemented yet")
 						# TODO
 					if utils.isConfigSection(config, utils.sectionTelegramName):
-						log(WARN, "Telegram is not implemented yet")
-						# TODO
+						log(DEBUG, "Sending Telegram message")
+						token = config.get(utils.sectionTelegramName, utils.telegramTokenName)
+						chatID = config.get(utils.sectionTelegramName, utils.telegramChatIDName)
+						bot = telegram.Bot(token)
+						bot.sendMessage(chatID, "Hurry up, your kimsufi server is available!!")
 		else:
 			log(ERROR, 'Calling API: "{}" "{}"'.format(response.status, response.message))
 	except Exception as e:

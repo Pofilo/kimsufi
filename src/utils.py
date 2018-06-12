@@ -26,6 +26,8 @@ idServerName = 'ID_SERVER'
 sectionHTTPRequestName = 'HTTP_REQUEST'
 sectionEmailName = 'EMAIL'
 sectionTelegramName = 'TELEGRAM'
+telegramTokenName = 'TOKEN'
+telegramChatIDName = 'CHATID'
 
 def openAndLoadConfig(args):
 	if args.configPath:
