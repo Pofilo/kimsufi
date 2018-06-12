@@ -16,7 +16,6 @@ You should have received a copy of the GNU General Public License along with thi
 import json
 import time
 import http1
-import requests
 import argparse
 import telegram
 
@@ -49,18 +48,20 @@ def main():
 				if set(zones).intersection(zonesDesired) and item['reference'] == idServer:
 					log(INFO, 'Found available server, sending notifications...')
 					if utils.isConfigSection(config, utils.sectionHTTPRequestName):
-						log(DEBUG, "Sending HTTP request")
+						log(DEBUG, 'Sending HTTP request')
 						request = config.get(utils.sectionHTTPRequestName, utils.HTTPRequest)
-						r = requests.get(request)
+						notifResponse = http1.get(request)
+						if notifResponse.status is not 200:
+							log(ERROR, 'Error calling HTTP request: "{}"'.format(request))
 					if utils.isConfigSection(config, utils.sectionEmailName):
-						log(WARN, "Email is not implemented yet")
+						log(WARN, 'Email is not implemented yet')
 						# TODO
 					if utils.isConfigSection(config, utils.sectionTelegramName):
-						log(DEBUG, "Sending Telegram message")
+						log(DEBUG, 'Sending Telegram message')
 						token = config.get(utils.sectionTelegramName, utils.telegramTokenName)
 						chatID = config.get(utils.sectionTelegramName, utils.telegramChatIDName)
 						bot = telegram.Bot(token)
-						bot.sendMessage(chatID, "Hurry up, your kimsufi server is available!!")
+						bot.sendMessage(chatID, 'Hurry up, your kimsufi server is available!!')
 		else:
 			log(ERROR, 'Calling API: "{}" "{}"'.format(response.status, response.message))
 	except Exception as e:
