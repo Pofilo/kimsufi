@@ -17,10 +17,10 @@ import json
 import time
 import http1
 import argparse
-import telegram
 import signal
 
 import utils
+import notifications
 from logger import log, ERROR, WARN, INFO, DEBUG
 
 running = True
@@ -64,21 +64,7 @@ def main():
 						serverFound = True
 						if not lastStatus:
 							log(INFO, 'Found available server, sending notifications...')
-							if utils.isConfigSection(config, utils.sectionHTTPRequestName):
-								log(DEBUG, 'Sending HTTP request')
-								request = config.get(utils.sectionHTTPRequestName, utils.HTTPRequest)
-								notifResponse = http1.get(request)
-								if notifResponse.status is not 200:
-									log(ERROR, 'Error calling HTTP request: "{}"'.format(request))
-							if utils.isConfigSection(config, utils.sectionEmailName):
-								log(WARN, 'Email is not implemented yet')
-								# TODO
-							if utils.isConfigSection(config, utils.sectionTelegramName):
-								log(DEBUG, 'Sending Telegram message')
-								token = config.get(utils.sectionTelegramName, utils.telegramTokenName)
-								chatID = config.get(utils.sectionTelegramName, utils.telegramChatIDName)
-								bot = telegram.Bot(token)
-								bot.sendMessage(chatID, 'Hurry up, your kimsufi server is available!!')
+							notifications.sendNotifications(config)
 							lastStatus = True
 						else:
 							log(DEBUG, 'Notification already sent, passing...')
