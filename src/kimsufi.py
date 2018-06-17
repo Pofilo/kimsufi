@@ -50,8 +50,10 @@ def main():
 	for zone in set(config.items(utils.sectionZonesName)):
 		zonesDesired.add(zone[1])
 
+	lastStatus = False
 	log(INFO, 'Calling kimsufi API on "{}"'.format(apiUrl))
 	while running:
+		serverFound = False
 		try:
 			response = http1.get(apiUrl)
 			if response.status == 200:
@@ -59,22 +61,33 @@ def main():
 				for item in struct['answer']['availability']:
 					zones = [z['zone'] for z in item['zones'] if z['availability'] not in ('unavailable', 'unknown')]
 					if set(zones).intersection(zonesDesired) and item['reference'] == idServer:
-						log(INFO, 'Found available server, sending notifications...')
-						if utils.isConfigSection(config, utils.sectionHTTPRequestName):
-							log(DEBUG, 'Sending HTTP request')
-							request = config.get(utils.sectionHTTPRequestName, utils.HTTPRequest)
-							notifResponse = http1.get(request)
-							if notifResponse.status is not 200:
-								log(ERROR, 'Error calling HTTP request: "{}"'.format(request))
-						if utils.isConfigSection(config, utils.sectionEmailName):
-							log(WARN, 'Email is not implemented yet')
-							# TODO
-						if utils.isConfigSection(config, utils.sectionTelegramName):
-							log(DEBUG, 'Sending Telegram message')
-							token = config.get(utils.sectionTelegramName, utils.telegramTokenName)
-							chatID = config.get(utils.sectionTelegramName, utils.telegramChatIDName)
-							bot = telegram.Bot(token)
-							bot.sendMessage(chatID, 'Hurry up, your kimsufi server is available!!')
+						serverFound = True
+						if not lastStatus:
+							log(INFO, 'Found available server, sending notifications...')
+							if utils.isConfigSection(config, utils.sectionHTTPRequestName):
+								log(DEBUG, 'Sending HTTP request')
+								request = config.get(utils.sectionHTTPRequestName, utils.HTTPRequest)
+								notifResponse = http1.get(request)
+								if notifResponse.status is not 200:
+									log(ERROR, 'Error calling HTTP request: "{}"'.format(request))
+							if utils.isConfigSection(config, utils.sectionEmailName):
+								log(WARN, 'Email is not implemented yet')
+								# TODO
+							if utils.isConfigSection(config, utils.sectionTelegramName):
+								log(DEBUG, 'Sending Telegram message')
+								token = config.get(utils.sectionTelegramName, utils.telegramTokenName)
+								chatID = config.get(utils.sectionTelegramName, utils.telegramChatIDName)
+								bot = telegram.Bot(token)
+								bot.sendMessage(chatID, 'Hurry up, your kimsufi server is available!!')
+							lastStatus = True
+						else:
+							log(DEBUG, 'Notification already sent, passing...')
+					if not serverFound:
+						log(DEBUG, 'No server available')
+						if lastStatus:
+							log(DEBUG, 'Server not available anymore')
+							# TODO: send notifications ?
+							lastStatus = False
 			else:
 				log(ERROR, 'Calling API: "{}" "{}"'.format(response.status, response.message))
 					# If signal occurs during process, there is no need to sleep
