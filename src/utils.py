@@ -31,7 +31,7 @@ sectionTelegramName = 'TELEGRAM'
 telegramTokenName = 'TOKEN'
 telegramChatIDName = 'CHATID'
 
-def openAndLoadConfig(args):
+def open_and_load_config(args):
 	if args.config_path:
 		config_path = args.config_path
 	else:
@@ -48,39 +48,39 @@ def openAndLoadConfig(args):
 		log(ERROR, 'Config file "{}" not found."'.format(configPath))
 		sys.exit(1)
 
-	checkConfig(config)
+	check_config(config)
 
 	return config, config_path
 
-def checkConfig(config):
+def check_config(config):
 	# Check at least a section of notification exists
-	if (not isConfigSection(config, sectionHTTPRequestName) 
-		and not isConfigSection(config, sectionEmailName) 
-		and not isConfigSection(config, sectionTelegramName)):
+	if (not is_config_section(config, sectionHTTPRequestName) 
+		and not is_config_section(config, sectionEmailName) 
+		and not is_config_section(config, sectionTelegramName)):
 		log(WARN, 'No section of notification found in the config file, just logs will be done.')
 	# Check the mandatories keys and sections
-	checkConfigSection(config, sectionZonesName)
-	checkConfigKey(config, sectionDefaultName, apiUrlName)
-	checkConfigKey(config, sectionDefaultName, idServerName)
+	check_config_section(config, sectionZonesName)
+	check_config_key(config, sectionDefaultName, apiUrlName)
+	check_config_key(config, sectionDefaultName, idServerName)
 
-def isConfigSection(config, section):
+def is_config_section(config, section):
 	if config.has_section(section):
 		return True
 	else:
 		return False
 
-def isConfigKey(config, section, key):
+def is_config_key(config, section, key):
 	if config.has_option(section, key):
 		return True
 	else:
 		return False
 
-def checkConfigSection(config, section):
-	if not isConfigSection(config, section):
+def check_config_section(config, section):
+	if not is_config_section(config, section):
 		log(ERROR, 'No section "{}" in config file'.format(section))
 		sys.exit(1)
 
-def checkConfigKey(config, section, key):
-	if not isConfigKey(config, section, key):
+def check_config_key(config, section, key):
+	if not is_config_key(config, section, key):
 		log(ERROR, 'No key "{}" in section "{}" in config file'.format(key, section))
 		sys.exit(1)

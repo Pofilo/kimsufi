@@ -42,7 +42,7 @@ def main():
 	args = parser.parse_args()
 
 	# Open conf and load parameters
-	config, config_path = utils.openAndLoadConfig(args)
+	config, config_path = utils.open_and_load_config(args)
 	api_url = config.get(utils.sectionDefaultName, utils.apiUrlName)
 	id_server = config.get(utils.sectionDefaultName, utils.idServerName)
 	polling_interval = config.get(utils.sectionDefaultName, utils.pollingIntervalName)

@@ -24,7 +24,7 @@ def send_notifications(config):
 	send_telegram_notification(config)
 	
 def send_http_notification(config):
-	if utils.isConfigSection(config, utils.sectionHTTPRequestName):
+	if utils.is_config_section(config, utils.sectionHTTPRequestName):
 		log(DEBUG, 'Sending HTTP request')
 		request = config.get(utils.sectionHTTPRequestName, utils.HTTPRequest)
 		notifResponse = http1.get(request)
@@ -32,12 +32,12 @@ def send_http_notification(config):
 			log(ERROR, 'Error calling HTTP request: "{}"'.format(request))
 
 def send_email_notification(config):
-	if utils.isConfigSection(config, utils.sectionEmailName):
+	if utils.is_config_section(config, utils.sectionEmailName):
 		log(WARN, 'Email is not implemented yet')
 		# TODO
 
 def send_telegram_notification(config):
-	if utils.isConfigSection(config, utils.sectionTelegramName):
+	if utils.is_config_section(config, utils.sectionTelegramName):
 		log(DEBUG, 'Sending Telegram message')
 		token = config.get(utils.sectionTelegramName, utils.telegramTokenName)
 		chatID = config.get(utils.sectionTelegramName, utils.telegramChatIDName)
