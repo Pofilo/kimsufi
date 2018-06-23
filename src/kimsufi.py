@@ -25,7 +25,7 @@ from logger import log, ERROR, WARN, INFO, DEBUG
 
 running = True
 
-def signalHandler(signal, frame):
+def signal_handler(signal, frame):
 	global running
 	running = False
 	log(DEBUG, 'Ending signal handled, ending the script...')
@@ -33,52 +33,52 @@ def signalHandler(signal, frame):
 def main():
 	log(INFO, '--------------------')
 
-	signal.signal(signal.SIGINT, signalHandler)
-	signal.signal(signal.SIGTERM, signalHandler)
+	signal.signal(signal.SIGINT, signal_handler)
+	signal.signal(signal.SIGTERM, signal_handler)
 
 	# Parse arguments
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--conf', '-c', dest='configPath')
+	parser.add_argument('--conf', '-c', dest='config_path')
 	args = parser.parse_args()
 
 	# Open conf and load parameters
-	config, configPath = utils.openAndLoadConfig(args)
-	apiUrl = config.get(utils.sectionDefaultName, utils.apiUrlName)
-	idServer = config.get(utils.sectionDefaultName, utils.idServerName)
-	pollingInterval = config.get(utils.sectionDefaultName, utils.pollingIntervalName)
-	zonesDesired = set()
+	config, config_path = utils.openAndLoadConfig(args)
+	api_url = config.get(utils.sectionDefaultName, utils.apiUrlName)
+	id_server = config.get(utils.sectionDefaultName, utils.idServerName)
+	polling_interval = config.get(utils.sectionDefaultName, utils.pollingIntervalName)
+	zones_desired = set()
 	for zone in set(config.items(utils.sectionZonesName)):
-		zonesDesired.add(zone[1])
+		zones_desired.add(zone[1])
 
-	lastStatus = False
-	log(INFO, 'Calling kimsufi API on "{}"'.format(apiUrl))
+	last_status = False
+	log(INFO, 'Calling kimsufi API on "{}"'.format(api_url))
 	while running:
-		serverFound = False
+		server_found = False
 		try:
-			response = http1.get(apiUrl)
+			response = http1.get(api_url)
 			if response.status == 200:
 				struct = json.loads(response.body)
 				for item in struct['answer']['availability']:
 					zones = [z['zone'] for z in item['zones'] if z['availability'] not in ('unavailable', 'unknown')]
-					if set(zones).intersection(zonesDesired) and item['reference'] == idServer:
-						serverFound = True
-						if not lastStatus:
+					if set(zones).intersection(zones_desired) and item['reference'] == id_server:
+						server_found = True
+						if not last_status:
 							log(INFO, 'Found available server, sending notifications...')
 							notifications.send_notifications(config)
-							lastStatus = True
+							last_status = True
 						else:
 							log(DEBUG, 'Notification already sent, passing...')
-					if not serverFound:
+					if not server_found:
 						log(DEBUG, 'No server available')
-						if lastStatus:
+						if last_status:
 							log(DEBUG, 'Server not available anymore')
 							# TODO: send notifications ?
-							lastStatus = False
+							last_status = False
 			else:
 				log(ERROR, 'Calling API: "{}" "{}"'.format(response.status, response.message))
 					# If signal occurs during process, there is no need to sleep
 			if running:
-				time.sleep(float(pollingInterval))
+				time.sleep(float(polling_interval))
 		except Exception as e:
 			log(ERROR, 'Calling API: {}'.format(str(e)))
 	

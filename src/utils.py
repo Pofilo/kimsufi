@@ -32,15 +32,15 @@ telegramTokenName = 'TOKEN'
 telegramChatIDName = 'CHATID'
 
 def openAndLoadConfig(args):
-	if args.configPath:
-		configPath = args.configPath
+	if args.config_path:
+		config_path = args.config_path
 	else:
-		configPath = defaultConfigPath
+		config_path = defaultConfigPath
 	config = configparser.SafeConfigParser()
 	
-	if os.path.isfile(configPath):
+	if os.path.isfile(config_path):
 		try:
-			config.read(configPath)
+			config.read(config_path)
 		except configparser.ParsingError as e:
 			log(ERROR, 'Parsing error: {}'.format(str(e)))
 			sys.exit(1)
@@ -50,7 +50,7 @@ def openAndLoadConfig(args):
 
 	checkConfig(config)
 
-	return config, configPath
+	return config, config_path
 
 def checkConfig(config):
 	# Check at least a section of notification exists
