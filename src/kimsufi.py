@@ -64,7 +64,7 @@ def main():
 						serverFound = True
 						if not lastStatus:
 							log(INFO, 'Found available server, sending notifications...')
-							notifications.sendNotifications(config)
+							notifications.send_notifications(config)
 							lastStatus = True
 						else:
 							log(DEBUG, 'Notification already sent, passing...')

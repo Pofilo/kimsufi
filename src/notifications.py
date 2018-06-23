@@ -18,12 +18,12 @@ import telegram
 import utils
 from logger import log, ERROR, WARN, INFO, DEBUG
 
-def sendNotifications(config):
-	sendHTTPNotification(config)
-	sendEmailNotification(config)
-	sendTelegramNotification(config)
+def send_notifications(config):
+	send_http_notification(config)
+	send_email_notification(config)
+	send_telegram_notification(config)
 	
-def sendHTTPNotification(config):
+def send_http_notification(config):
 	if utils.isConfigSection(config, utils.sectionHTTPRequestName):
 		log(DEBUG, 'Sending HTTP request')
 		request = config.get(utils.sectionHTTPRequestName, utils.HTTPRequest)
@@ -31,12 +31,12 @@ def sendHTTPNotification(config):
 		if notifResponse.status is not 200:
 			log(ERROR, 'Error calling HTTP request: "{}"'.format(request))
 
-def sendEmailNotification(config):
+def send_email_notification(config):
 	if utils.isConfigSection(config, utils.sectionEmailName):
 		log(WARN, 'Email is not implemented yet')
 		# TODO
 
-def sendTelegramNotification(config):
+def send_telegram_notification(config):
 	if utils.isConfigSection(config, utils.sectionTelegramName):
 		log(DEBUG, 'Sending Telegram message')
 		token = config.get(utils.sectionTelegramName, utils.telegramTokenName)
