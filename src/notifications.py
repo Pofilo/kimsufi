@@ -27,8 +27,8 @@ def send_http_notification(config):
 	if utils.is_config_section(config, utils.SECTION_HTTP_REQUEST_NAME):
 		log(DEBUG, 'Sending HTTP request')
 		request = config.get(utils.SECTION_HTTP_REQUEST_NAME, utils.HTTP_REQUEST)
-		notifResponse = http1.get(request)
-		if notifResponse.status is not 200:
+		notif_response = http1.get(request)
+		if notif_response.status is not 200:
 			log(ERROR, 'Error calling HTTP request: "{}"'.format(request))
 
 def send_email_notification(config):
@@ -42,4 +42,4 @@ def send_telegram_notification(config):
 		token = config.get(utils.SECTION_TELEGRAM_NAME, utils.TELEGRAM_TOKEN_NAME)
 		chatID = config.get(utils.SECTION_TELEGRAM_NAME, utils.TELEGRAM_CHATID_NAME)
 		bot = telegram.Bot(token)
-		bot.sendMessage(chatID, 'Hurry up, your kimsufi server is available!!')
+		bot.send_message(chatID, 'Hurry up, your kimsufi server is available!!')
