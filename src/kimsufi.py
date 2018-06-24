@@ -43,11 +43,11 @@ def main():
 
 	# Open conf and load parameters
 	config, config_path = utils.open_and_load_config(args)
-	api_url = config.get(utils.sectionDefaultName, utils.apiUrlName)
-	id_server = config.get(utils.sectionDefaultName, utils.idServerName)
-	polling_interval = config.get(utils.sectionDefaultName, utils.pollingIntervalName)
+	api_url = config.get(utils.SECTION_DEFAULT_NAME, utils.API_URL_NAME)
+	id_server = config.get(utils.SECTION_DEFAULT_NAME, utils.ID_SERVER_NAME)
+	polling_interval = config.get(utils.SECTION_DEFAULT_NAME, utils.POLLING_INTERVAL_NAME)
 	zones_desired = set()
-	for zone in set(config.items(utils.sectionZonesName)):
+	for zone in set(config.items(utils.SECTION_ZONES_NAME)):
 		zones_desired.add(zone[1])
 
 	last_status = False

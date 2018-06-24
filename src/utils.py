@@ -18,24 +18,24 @@ import sys
 
 from logger import log, ERROR, WARN, INFO, DEBUG
 
-defaultConfigPath = '../config/kimsufi.conf'
-sectionDefaultName = 'GENERAL'
-apiUrlName = 'API_URL'
-sectionZonesName = 'ZONES'
-idServerName = 'ID_SERVER'
-pollingIntervalName = 'POLLING_INTERVAL'
-sectionHTTPRequestName = 'HTTP_REQUEST'
-HTTPRequest = 'REQUEST'
-sectionEmailName = 'EMAIL'
-sectionTelegramName = 'TELEGRAM'
-telegramTokenName = 'TOKEN'
-telegramChatIDName = 'CHATID'
+DEFAULT_CONFIG_PATH = '../config/kimsufi.conf'
+SECTION_DEFAULT_NAME = 'GENERAL'
+API_URL_NAME = 'API_URL'
+SECTION_ZONES_NAME = 'ZONES'
+ID_SERVER_NAME = 'ID_SERVER'
+POLLING_INTERVAL_NAME = 'POLLING_INTERVAL'
+SECTION_HTTP_REQUEST_NAME = 'HTTP_REQUEST'
+HTTP_REQUEST = 'REQUEST'
+SECTION_EMAIL_NAME = 'EMAIL'
+SECTION_TELEGRAM_NAME = 'TELEGRAM'
+TELEGRAM_TOKEN_NAME = 'TOKEN'
+TELEGRAM_CHATID_NAME = 'CHATID'
 
 def open_and_load_config(args):
 	if args.config_path:
 		config_path = args.config_path
 	else:
-		config_path = defaultConfigPath
+		config_path = DEFAULT_CONFIG_PATH
 	config = configparser.SafeConfigParser()
 	
 	if os.path.isfile(config_path):
@@ -54,14 +54,14 @@ def open_and_load_config(args):
 
 def check_config(config):
 	# Check at least a section of notification exists
-	if (not is_config_section(config, sectionHTTPRequestName) 
-		and not is_config_section(config, sectionEmailName) 
-		and not is_config_section(config, sectionTelegramName)):
+	if (not is_config_section(config, SECTION_HTTP_REQUEST_NAME) 
+		and not is_config_section(config, SECTION_EMAIL_NAME) 
+		and not is_config_section(config, SECTION_TELEGRAM_NAME)):
 		log(WARN, 'No section of notification found in the config file, just logs will be done.')
 	# Check the mandatories keys and sections
-	check_config_section(config, sectionZonesName)
-	check_config_key(config, sectionDefaultName, apiUrlName)
-	check_config_key(config, sectionDefaultName, idServerName)
+	check_config_section(config, SECTION_ZONES_NAME)
+	check_config_key(config, SECTION_DEFAULT_NAME, API_URL_NAME)
+	check_config_key(config, SECTION_DEFAULT_NAME, ID_SERVER_NAME)
 
 def is_config_section(config, section):
 	if config.has_section(section):

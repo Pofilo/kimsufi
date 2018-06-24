@@ -24,22 +24,22 @@ def send_notifications(config):
 	send_telegram_notification(config)
 	
 def send_http_notification(config):
-	if utils.is_config_section(config, utils.sectionHTTPRequestName):
+	if utils.is_config_section(config, utils.SECTION_HTTP_REQUEST_NAME):
 		log(DEBUG, 'Sending HTTP request')
-		request = config.get(utils.sectionHTTPRequestName, utils.HTTPRequest)
+		request = config.get(utils.SECTION_HTTP_REQUEST_NAME, utils.HTTP_REQUEST)
 		notifResponse = http1.get(request)
 		if notifResponse.status is not 200:
 			log(ERROR, 'Error calling HTTP request: "{}"'.format(request))
 
 def send_email_notification(config):
-	if utils.is_config_section(config, utils.sectionEmailName):
+	if utils.is_config_section(config, utils.SECTION_EMAIL_NAME):
 		log(WARN, 'Email is not implemented yet')
 		# TODO
 
 def send_telegram_notification(config):
-	if utils.is_config_section(config, utils.sectionTelegramName):
+	if utils.is_config_section(config, utils.SECTION_TELEGRAM_NAME):
 		log(DEBUG, 'Sending Telegram message')
-		token = config.get(utils.sectionTelegramName, utils.telegramTokenName)
-		chatID = config.get(utils.sectionTelegramName, utils.telegramChatIDName)
+		token = config.get(utils.SECTION_TELEGRAM_NAME, utils.TELEGRAM_TOKEN_NAME)
+		chatID = config.get(utils.SECTION_TELEGRAM_NAME, utils.TELEGRAM_CHATID_NAME)
 		bot = telegram.Bot(token)
 		bot.sendMessage(chatID, 'Hurry up, your kimsufi server is available!!')
