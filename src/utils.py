@@ -35,55 +35,55 @@ TELEGRAM_CHATID_NAME = 'CHATID'
 my_logger = Logger()
 
 def open_and_load_config(args):
-	if args.config_path:
-		config_path = args.config_path
-	else:
-		config_path = DEFAULT_CONFIG_PATH
-	config = configparser.SafeConfigParser()
-	
-	if os.path.isfile(config_path):
-		try:
-			config.read(config_path)
-		except configparser.ParsingError as e:
-			my_logger.log(FATAL, 'Parsing error: {}'.format(str(e)))
-	else:
-		my_logger.log(FATAL, 'Config file "{}" not found."'.format(configPath))
+    if args.config_path:
+        config_path = args.config_path
+    else:
+        config_path = DEFAULT_CONFIG_PATH
+    config = configparser.SafeConfigParser()
 
-	check_config(config)
+    if os.path.isfile(config_path):
+        try:
+            config.read(config_path)
+        except configparser.ParsingError as e:
+            my_logger.log(FATAL, 'Parsing error: {}'.format(str(e)))
+    else:
+        my_logger.log(FATAL, 'Config file "{}" not found."'.format(configPath))
 
-	return config, config_path
+    check_config(config)
+
+    return config, config_path
 
 def check_config(config):
-	# Check at least a section of notification exists
-	if (not is_config_section(config, SECTION_HTTP_REQUEST_NAME) 
-		and not is_config_section(config, SECTION_EMAIL_NAME) 
-		and not is_config_section(config, SECTION_TELEGRAM_NAME)):
-		my_logger.log(WARN, 'No section of notification found in the config file, just logs will be done.')
-	# Check the mandatories keys and sections
-	check_config_section(config, SECTION_ZONES_NAME)
-	check_config_key(config, SECTION_DEFAULT_NAME, API_URL_NAME)
-	check_config_key(config, SECTION_DEFAULT_NAME, ID_SERVER_NAME)
+    # Check at least a section of notification exists
+    if (not is_config_section(config, SECTION_HTTP_REQUEST_NAME)
+            and not is_config_section(config, SECTION_EMAIL_NAME)
+            and not is_config_section(config, SECTION_TELEGRAM_NAME)):
+        my_logger.log(WARN, 'No section of notification found in the config file, just logs will be done.')
+    # Check the mandatories keys and sections
+    check_config_section(config, SECTION_ZONES_NAME)
+    check_config_key(config, SECTION_DEFAULT_NAME, API_URL_NAME)
+    check_config_key(config, SECTION_DEFAULT_NAME, ID_SERVER_NAME)
 
 def is_config_section(config, section):
-	if config.has_section(section):
-		return True
-	else:
-		return False
+    if config.has_section(section):
+        return True
+    else:
+        return False
 
 def is_config_key(config, section, key):
-	if config.has_option(section, key):
-		return True
-	else:
-		return False
+    if config.has_option(section, key):
+        return True
+    else:
+        return False
 
 def check_config_section(config, section):
-	if not is_config_section(config, section):
-		my_logger.log(FATAL, 'No section "{}" in config file'.format(section))
+    if not is_config_section(config, section):
+        my_logger.log(FATAL, 'No section "{}" in config file'.format(section))
 
 def check_config_key(config, section, key):
-	if not is_config_key(config, section, key):
-		my_logger.log(FATAL, 'No key "{}" in section "{}" in config file'.format(key, section))
+    if not is_config_key(config, section, key):
+        my_logger.log(FATAL, 'No key "{}" in section "{}" in config file'.format(key, section))
 
 def check_python_version():
-	if version_info <= (3, 0):
-		my_logger.log(FATAL, 'The script needs at least python 3.0')
+    if version_info <= (3, 0):
+        my_logger.log(FATAL, 'The script needs at least python 3.0')
