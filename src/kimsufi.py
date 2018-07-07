@@ -21,17 +21,18 @@ import signal
 
 import utils
 import notifications
-from logger import log, FATAL, ERROR, WARN, INFO, DEBUG
+from logger import Logger, FATAL, ERROR, WARN, INFO, DEBUG
 
 running = True
+my_logger = Logger()
 
 def signal_handler(signal, frame):
 	global running
 	running = False
-	log(DEBUG, 'Ending signal handled, ending the script...')
+	my_logger.log(DEBUG, 'Ending signal handled, ending the script...')
 
 def main():
-	log(INFO, '--------------------')
+	my_logger.log(INFO, '--------------------')
 
 	# Check python3 is used
 	utils.check_python_version()
@@ -46,6 +47,7 @@ def main():
 
 	# Open conf and load parameters
 	config, config_path = utils.open_and_load_config(args)
+	my_logger.level_used = config.get(utils.SECTION_DEFAULT_NAME, utils.LOG_LEVEL)
 	api_url = config.get(utils.SECTION_DEFAULT_NAME, utils.API_URL_NAME)
 	id_server = config.get(utils.SECTION_DEFAULT_NAME, utils.ID_SERVER_NAME)
 	polling_interval = config.get(utils.SECTION_DEFAULT_NAME, utils.POLLING_INTERVAL_NAME)
@@ -54,7 +56,7 @@ def main():
 		zones_desired.add(zone[1])
 
 	last_status = False
-	log(INFO, 'Calling kimsufi API on "{}"'.format(api_url))
+	my_logger.log(INFO, 'Calling kimsufi API on "{}"'.format(api_url))
 	while running:
 		server_found = False
 		try:
@@ -66,26 +68,26 @@ def main():
 					if set(zones).intersection(zones_desired) and item['reference'] == id_server:
 						server_found = True
 						if not last_status:
-							log(INFO, 'Found available server, sending notifications...')
+							my_logger.log(INFO, 'Found available server, sending notifications...')
 							notifications.send_notifications(config)
 							last_status = True
 						else:
-							log(DEBUG, 'Notification already sent, passing...')
+							my_logger.log(DEBUG, 'Notification already sent, passing...')
 					if not server_found:
-						log(DEBUG, 'No server available')
+						my_logger.log(DEBUG, 'No server available')
 						if last_status:
-							log(DEBUG, 'Server not available anymore')
+							my_logger.log(DEBUG, 'Server not available anymore')
 							# TODO: send notifications ?
 							last_status = False
 			else:
-				log(ERROR, 'Calling API: "{}" "{}"'.format(response.status, response.message))
+				my_logger.log(ERROR, 'Calling API: "{}" "{}"'.format(response.status, response.message))
 			# If signal occurs during process, there is no need to sleep
 			if running:
 				time.sleep(float(polling_interval))
 		except Exception as e:
-			log(ERROR, 'Calling API: {}'.format(str(e)))
+			my_logger.log(ERROR, 'Calling API: {}'.format(str(e)))
 	
-	log(INFO, 'kimsufi script ended.')
+	my_logger.log(INFO, 'kimsufi script ended.')
 
 if __name__ == '__main__':
 	main()

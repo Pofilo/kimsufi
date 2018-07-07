@@ -16,7 +16,9 @@ import http1
 import telegram
 
 import utils
-from logger import log, FATAL, ERROR, WARN, INFO, DEBUG
+from logger import Logger, FATAL, ERROR, WARN, INFO, DEBUG
+
+my_logger = Logger()
 
 def send_notifications(config):
 	send_http_notification(config)
@@ -25,20 +27,20 @@ def send_notifications(config):
 	
 def send_http_notification(config):
 	if utils.is_config_section(config, utils.SECTION_HTTP_REQUEST_NAME):
-		log(DEBUG, 'Sending HTTP request')
+		my_logger.log(DEBUG, 'Sending HTTP request')
 		request = config.get(utils.SECTION_HTTP_REQUEST_NAME, utils.HTTP_REQUEST)
 		notif_response = http1.get(request)
 		if notif_response.status is not 200:
-			log(ERROR, 'Error calling HTTP request: "{}"'.format(request))
+			my_logger.log(ERROR, 'Error calling HTTP request: "{}"'.format(request))
 
 def send_email_notification(config):
 	if utils.is_config_section(config, utils.SECTION_EMAIL_NAME):
-		log(WARN, 'Email is not implemented yet')
+		my_logger.log(WARN, 'Email is not implemented yet')
 		# TODO
 
 def send_telegram_notification(config):
 	if utils.is_config_section(config, utils.SECTION_TELEGRAM_NAME):
-		log(DEBUG, 'Sending Telegram message')
+		my_logger.log(DEBUG, 'Sending Telegram message')
 		token = config.get(utils.SECTION_TELEGRAM_NAME, utils.TELEGRAM_TOKEN_NAME)
 		chatID = config.get(utils.SECTION_TELEGRAM_NAME, utils.TELEGRAM_CHATID_NAME)
 		bot = telegram.Bot(token)
