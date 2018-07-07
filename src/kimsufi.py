@@ -76,7 +76,7 @@ def main():
 							last_status = False
 			else:
 				log(ERROR, 'Calling API: "{}" "{}"'.format(response.status, response.message))
-					# If signal occurs during process, there is no need to sleep
+			# If signal occurs during process, there is no need to sleep
 			if running:
 				time.sleep(float(polling_interval))
 		except Exception as e:
