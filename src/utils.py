@@ -84,3 +84,8 @@ def check_config_key(config, section, key):
 	if not is_config_key(config, section, key):
 		log(ERROR, 'No key "{}" in section "{}" in config file'.format(key, section))
 		sys.exit(1)
+
+def check_python_version():
+	if sys.version_info <= (3, 0):
+		log(ERROR, 'The script needs at least python 3.0')
+		sys.exit(1)
