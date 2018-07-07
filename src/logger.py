@@ -13,9 +13,12 @@ You should have received a copy of the GNU General Public License along with thi
 '''
 
 
+import sys
+
 from datetime import datetime
 
 # LEVELS
+FATAL = 'FATAL'
 ERROR = 'ERROR'
 WARN = 'WARN'
 INFO = 'INFO'
@@ -23,4 +26,9 @@ DEBUG = 'DEBUG'
 
 # Right now, logs are just 'python prints', we should maybe consider implementing a 'real logger'
 def log(level, message):
-	print('{} ({}): {}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), level, message))
+	message = '{} ({}): {}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), level, message)
+	if level is FATAL:
+		sys.exit(message)
+	else:
+		print(message)
+		

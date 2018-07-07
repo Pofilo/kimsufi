@@ -16,7 +16,7 @@ import http1
 import telegram
 
 import utils
-from logger import log, ERROR, WARN, INFO, DEBUG
+from logger import log, FATAL, ERROR, WARN, INFO, DEBUG
 
 def send_notifications(config):
 	send_http_notification(config)

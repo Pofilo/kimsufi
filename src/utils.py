@@ -14,9 +14,9 @@ You should have received a copy of the GNU General Public License along with thi
 
 import configparser
 import os.path
-import sys
 
-from logger import log, ERROR, WARN, INFO, DEBUG
+from sys import version_info
+from logger import log, FATAL, ERROR, WARN, INFO, DEBUG
 
 DEFAULT_CONFIG_PATH = '../config/kimsufi.conf'
 SECTION_DEFAULT_NAME = 'GENERAL'
@@ -42,11 +42,9 @@ def open_and_load_config(args):
 		try:
 			config.read(config_path)
 		except configparser.ParsingError as e:
-			log(ERROR, 'Parsing error: {}'.format(str(e)))
-			sys.exit(1)
+			log(FATAL, 'Parsing error: {}'.format(str(e)))
 	else:
-		log(ERROR, 'Config file "{}" not found."'.format(configPath))
-		sys.exit(1)
+		log(FATAL, 'Config file "{}" not found."'.format(configPath))
 
 	check_config(config)
 
@@ -77,15 +75,12 @@ def is_config_key(config, section, key):
 
 def check_config_section(config, section):
 	if not is_config_section(config, section):
-		log(ERROR, 'No section "{}" in config file'.format(section))
-		sys.exit(1)
+		log(FATAL, 'No section "{}" in config file'.format(section))
 
 def check_config_key(config, section, key):
 	if not is_config_key(config, section, key):
-		log(ERROR, 'No key "{}" in section "{}" in config file'.format(key, section))
-		sys.exit(1)
+		log(FATAL, 'No key "{}" in section "{}" in config file'.format(key, section))
 
 def check_python_version():
-	if sys.version_info <= (3, 0):
-		log(ERROR, 'The script needs at least python 3.0')
-		sys.exit(1)
+	if version_info <= (3, 0):
+		log(FATAL, 'The script needs at least python 3.0')

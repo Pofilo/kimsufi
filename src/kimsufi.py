@@ -21,7 +21,7 @@ import signal
 
 import utils
 import notifications
-from logger import log, ERROR, WARN, INFO, DEBUG
+from logger import log, FATAL, ERROR, WARN, INFO, DEBUG
 
 running = True
 
