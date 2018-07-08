@@ -20,28 +20,33 @@ from logger import Logger, FATAL, ERROR, WARN, INFO, DEBUG
 
 my_logger = Logger()
 
-def send_notifications(config):
-    send_http_notification(config)
-    send_email_notification(config)
-    send_telegram_notification(config)
+def send_notifications(config, found):
+    send_http_notification(config, found)
+    send_email_notification(config, found)
+    send_telegram_notification(config, found)
 
-def send_http_notification(config):
+def send_http_notification(config, found):
     if utils.is_config_section(config, utils.SECTION_HTTP_REQUEST_NAME):
         my_logger.log(DEBUG, 'Sending HTTP request')
-        request = config.get(utils.SECTION_HTTP_REQUEST_NAME, utils.HTTP_REQUEST)
+        request = config.get(utils.SECTION_HTTP_REQUEST_NAME, utils.HTTP_REQUEST_FOUND)
+        if not found:
+            request = config.get(utils.SECTION_HTTP_REQUEST_NAME, utils.HTTP_REQUEST_NOT_FOUND)
         notif_response = http1.get(request)
         if notif_response.status is not 200:
             my_logger.log(ERROR, 'Error calling HTTP request: "{}"'.format(request))
 
-def send_email_notification(config):
+def send_email_notification(config, found):
     if utils.is_config_section(config, utils.SECTION_EMAIL_NAME):
         my_logger.log(WARN, 'Email is not implemented yet')
         # TODO
 
-def send_telegram_notification(config):
+def send_telegram_notification(config, found):
     if utils.is_config_section(config, utils.SECTION_TELEGRAM_NAME):
         my_logger.log(DEBUG, 'Sending Telegram message')
         token = config.get(utils.SECTION_TELEGRAM_NAME, utils.TELEGRAM_TOKEN_NAME)
         chatID = config.get(utils.SECTION_TELEGRAM_NAME, utils.TELEGRAM_CHATID_NAME)
         bot = telegram.Bot(token)
-        bot.send_message(chatID, 'Hurry up, your kimsufi server is available!!')
+        message = 'Hurry up, your kimsufi server is available!!'
+        if not found:
+            message = 'Too late, your kimsufi is not available anymore..'
+        bot.send_message(chatID, message)

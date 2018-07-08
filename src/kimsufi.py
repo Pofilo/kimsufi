@@ -69,7 +69,7 @@ def main():
                         server_found = True
                         if not last_status:
                             my_logger.log(INFO, 'Found available server, sending notifications...')
-                            notifications.send_notifications(config)
+                            notifications.send_notifications(config, True)
                             last_status = True
                         else:
                             my_logger.log(DEBUG, 'Notification already sent, passing...')
@@ -77,7 +77,7 @@ def main():
                         my_logger.log(DEBUG, 'No server available')
                         if last_status:
                             my_logger.log(DEBUG, 'Server not available anymore')
-                            # TODO: send notifications ?
+                            notifications.send_notifications(config, False)
                             last_status = False
             else:
                 my_logger.log(ERROR, 'Calling API: "{}" "{}"'.format(response.status, response.message))
