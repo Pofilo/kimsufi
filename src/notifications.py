@@ -28,9 +28,9 @@ def send_notifications(config, found):
 def send_http_notification(config, found):
     if utils.is_config_section(config, utils.SECTION_HTTP_REQUEST_NAME):
         my_logger.log(DEBUG, 'Sending HTTP request')
-        request = config.get(utils.SECTION_HTTP_REQUEST_NAME, utils.HTTP_REQUEST_FOUND)
+        request = config.get(utils.SECTION_HTTP_REQUEST_NAME, utils.HTTP_REQUEST_FOUND_NAME)
         if not found:
-            request = config.get(utils.SECTION_HTTP_REQUEST_NAME, utils.HTTP_REQUEST_NOT_FOUND)
+            request = config.get(utils.SECTION_HTTP_REQUEST_NAME, utils.HTTP_REQUEST_NOT_FOUND_NAME)
         notif_response = http1.get(request)
         if notif_response.status is not 200:
             my_logger.log(ERROR, 'Error calling HTTP request: "{}"'.format(request))

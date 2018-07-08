@@ -24,10 +24,10 @@ API_URL_NAME = 'API_URL'
 SECTION_ZONES_NAME = 'ZONES'
 ID_SERVER_NAME = 'ID_SERVER'
 POLLING_INTERVAL_NAME = 'POLLING_INTERVAL'
-LOG_LEVEL = 'LOG_LEVEL'
+LOG_LEVEL_NAME = 'LOG_LEVEL'
 SECTION_HTTP_REQUEST_NAME = 'HTTP_REQUEST'
-HTTP_REQUEST_FOUND = 'REQUEST_FOUND'
-HTTP_REQUEST_NOT_FOUND = 'REQUEST_NOT_FOUND'
+HTTP_REQUEST_FOUND_NAME = 'REQUEST_FOUND'
+HTTP_REQUEST_NOT_FOUND_NAME = 'REQUEST_NOT_FOUND'
 SECTION_EMAIL_NAME = 'EMAIL'
 SECTION_TELEGRAM_NAME = 'TELEGRAM'
 TELEGRAM_TOKEN_NAME = 'TOKEN'
@@ -60,10 +60,24 @@ def check_config(config):
             and not is_config_section(config, SECTION_EMAIL_NAME)
             and not is_config_section(config, SECTION_TELEGRAM_NAME)):
         my_logger.log(WARN, 'No section of notification found in the config file, just logs will be done.')
+    
     # Check the mandatories keys and sections
     check_config_section(config, SECTION_ZONES_NAME)
     check_config_key(config, SECTION_DEFAULT_NAME, API_URL_NAME)
     check_config_key(config, SECTION_DEFAULT_NAME, ID_SERVER_NAME)
+    check_config_key(config, SECTION_DEFAULT_NAME, POLLING_INTERVAL_NAME)
+    check_config_key(config, SECTION_DEFAULT_NAME, LOG_LEVEL_NAME)
+
+    # Check notifications sections
+    if is_config_section(config, SECTION_HTTP_REQUEST_NAME):
+        check_config_key(config, SECTION_HTTP_REQUEST_NAME, HTTP_REQUEST_FOUND_NAME)
+        check_config_key(config, SECTION_HTTP_REQUEST_NAME, HTTP_REQUEST_NOT_FOUND_NAME)
+    if is_config_section(config, SECTION_EMAIL_NAME):
+        # TODO
+        pass
+    if is_config_section(config, SECTION_TELEGRAM_NAME):
+        check_config_key(config, SECTION_TELEGRAM_NAME, TELEGRAM_TOKEN_NAME)
+        check_config_key(config, SECTION_TELEGRAM_NAME, TELEGRAM_CHATID_NAME)
 
 def is_config_section(config, section):
     if config.has_section(section):
