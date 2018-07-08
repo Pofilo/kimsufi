@@ -18,6 +18,7 @@ import time
 import http1
 import argparse
 import signal
+from os import getpid
 
 import utils
 import notifications
@@ -56,7 +57,7 @@ def main():
         zones_desired.add(zone[1])
 
     last_status = False
-    my_logger.log(INFO, 'Calling kimsufi API on "{}"'.format(api_url))
+    my_logger.log(INFO, 'Calling kimsufi API on "{}" with PID "{}"'.format(api_url, getpid()))
     while running:
         server_found = False
         try:
