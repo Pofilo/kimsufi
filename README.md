@@ -40,6 +40,10 @@ Doc: How to get token and chatid for telegram notifications.
     + Specify the path of the configuration file (relative to `kimsufi/src` or absolute)
     + Default value is `../config/kimsufi.conf`
 
+### Adding notifier
+
+You can hack the script and add notifiers in the file `notifications.py`. Simply create a new function (in parameter, you can have the config and the boolean meaning if the server is found or not) and call it into `send_notifications(config, found)`, modify the configuration file if needed, et voilà!
+
 ## License
 
 This project is licensed under the GNU GPL License. See the [LICENSE](https://git.pofilo.fr/pofilo/kimsufi/src/branch/master/LICENSE) file for the full license text.
