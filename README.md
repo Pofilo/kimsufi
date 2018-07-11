@@ -1,56 +1,56 @@
-Sends a sms when the kimsufi is available.
-Requirements: Using Free URL for the sms.
+# kimsufi
+Last stable version [available here](https://git.pofilo.fr/pofilo/kimsufi/releases).
 
-Servers:
-{
-    "160sk6": "KS-6",
-    "160sk5": "KS-5",
-    "160sk4": "KS-4A",
-    "160sk41": "KS-4B",
-    "160sk42": "KS-4C",
-    "160sk3": "KS-3A",
-    "160sk31": "KS-3B",
-    "160sk32": "KS-3C",
-    "160sk2": "KS-2A",
-    "160sk21": "KS-2B",
-    "160sk22": "KS-2C",
-    "160sk23": "KS-2D",
-    "161sk2": "KS-2E",
-    "160sk1": "KS-1",
+Sends an alert when your Kimsufi server is available.
 
-    "141game1": "GAME-1",
-    "141game2": "GAME-2",
+## Requirements
 
-    "142sys4":  "SYS-IP-1",
-    "142sys5":  "SYS-IP-2",
-    "142sys8":  "SYS-IP-4",
-    "142sys6":  "SYS-IP-5",
-    "142sys10": "SYS-IP-5S",
-    "142sys7":  "SYS-IP-6",
-    "142sys9":  "SYS-IP-6S",
++ The script uses **python 3.7**
++ `pip install -r requirements.txt`
 
-    "143sys13": "E3-SSD-1",
-    "143sys10": "E3-SSD-2",
-    "143sys11": "E3-SSD-3",
-    "143sys12": "E3-SSD-4",
-    
-    "143sys4":  "E3-SAT-1",
-    "143sys1":  "E3-SAT-2",
-    "143sys2":  "E3-SAT-3",
-    "143sys3":  "E3-SAT-4",
-    
-    "141bk1":   "BK-8T",
-    "141bk2":   "BK-24T"
-}
+## Purpose
 
-Regions:
-{
-    "bhs": "Beauharnois, Canada (Americas)",
-    "gra": "Gravelines, France",
-    "rbx": "Roubaix, France (Western Europe)",
-    "sbg": "Strasbourg, France (Central Europe)",
-    "par": "Paris, France"
-}
+The objective is to **send notifications** when the Kimsufi server you want is available in the zone(s) desired.
+There is (for now) 3 types of notifications:
++ Email
++ HTTP request
++ Telegram message
+
+A notification will be send to the notifiers configured when the server is available and when it's not anymore.
+
+## Documentation
+
+In `doc/`, you can find [the list of references](https://git.pofilo.fr/pofilo/kimsufi/src/branch/master/doc/list-references.md) and [the list of zones](https://git.pofilo.fr/pofilo/kimsufi/src/branch/master/doc/list-zones.md). Helpful to edit the configuration file according to the Kimsufi server you want.
+
+### TODO
+Doc: How to get token and chatid for telegram notifications.
+
+## Installation
+
++ Download the last stable version [available here](https://git.pofilo.fr/pofilo/kimsufi/releases)
++ `cd kimsufi`
++ `cp config/kimsufi.sample.conf config/kimsufi.conf`
++ Edit *config/kimsufi.conf*
++ `cd src`
++ `python3.7 kimsufi.py` or `python3.7 -u kimsufi.py > log.txt &` if you want to use it as a daemon *(the PID is given in the first lines of the logs)*
+
+### Options
+
++ `-c`, `--conf`
+    + Specify the path of the configuration file (relative to `kimsufi/src` or absolute)
+    + Default value is `../config/kimsufi.conf`
+
+## License
+
+This project is licensed under the GNU GPL License. See the [LICENSE](https://git.pofilo.fr/pofilo/kimsufi/src/branch/master/LICENSE) file for the full license text.
 
 ## Credits
-Michel Casabianca
+
++ [@Pofilo](https://git.pofilo.fr/pofilo/)
++ [@c4s4](https://github.com/c4s4)
+
+## Bugs
+
+If you experience an issue, you have other ideas to the developpement or anything else, feel free to [report it](https://git.pofilo.fr/pofilo/kimsufi/issues) or  [fix it with a PR](https://git.pofilo.fr/pofilo/kimsufi/pulls)!
+
+ 
