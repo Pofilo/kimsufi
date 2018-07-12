@@ -20,10 +20,13 @@ A notification will be send to the notifiers configured when the server is avail
 
 ## Documentation
 
+### References and zones
+
 In `doc/`, you can find [the list of references](https://git.pofilo.fr/pofilo/kimsufi/src/branch/master/doc/list-references.md) and [the list of zones](https://git.pofilo.fr/pofilo/kimsufi/src/branch/master/doc/list-zones.md). Helpful to edit the configuration file according to the Kimsufi server you want.
 
-### TODO
-Doc: How to get token and chatid for telegram notifications.
+### Telegram
+
+You can [find here](https://git.pofilo.fr/pofilo/kimsufi/src/branch/master/doc/notice-telgram.md) the documentation helping you to setup the telegram notifier.
 
 ## Installation
 
