@@ -4,13 +4,13 @@ Official notice available [here](https://core.telegram.org/bots#6-botfather).
 
 ## How to create your bot ?
 
-+ Go to [@botfather](https://t.me/BotFather) and type `/start`
++ Speak to [@botfather](https://t.me/BotFather) and type `/start`
 + Type `/newbot` and give a name to your bot
 + Save the API token in `TOKEN` in your configuration file
 
 ## How to generate chatID ?
 
-+ Go to [@cid_bot](https://t.me/cid_bot) and type `/start`
++ Speak to [@cid_bot](https://t.me/cid_bot) and type `/start`
 + Type `chatid` to get your chatID
 + Save it in the `CHATID` in your configuration file
 

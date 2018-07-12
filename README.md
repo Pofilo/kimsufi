@@ -26,7 +26,7 @@ In `doc/`, you can find [the list of references](https://git.pofilo.fr/pofilo/ki
 
 ### Telegram
 
-You can [find here](https://git.pofilo.fr/pofilo/kimsufi/src/branch/master/doc/notice-telgram.md) the documentation helping you to setup the telegram notifier.
+You can [find here](https://git.pofilo.fr/pofilo/kimsufi/src/branch/master/doc/notice-telegram.md) the documentation helping you to setup the telegram notifier.
 
 ## Installation
 
