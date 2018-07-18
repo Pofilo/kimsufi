@@ -74,12 +74,12 @@ def main():
                             last_status = True
                         else:
                             my_logger.log(DEBUG, 'Notification already sent, passing...')
-                    if not server_found:
-                        my_logger.log(DEBUG, 'No server available')
-                        if last_status:
-                            my_logger.log(DEBUG, 'Server not available anymore')
-                            notifications.send_notifications(config, False)
-                            last_status = False
+                if not server_found:
+                    my_logger.log(DEBUG, 'No server available')
+                    if last_status:
+                        my_logger.log(DEBUG, 'Server not available anymore')
+                        notifications.send_notifications(config, False)
+                        last_status = False
             else:
                 my_logger.log(ERROR, 'Calling API: "{}" "{}"'.format(response.status, response.message))
             # If signal occurs during process, there is no need to sleep
