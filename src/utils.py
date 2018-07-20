@@ -100,5 +100,5 @@ def check_config_key(config, section, key):
         my_logger.log(FATAL, 'No key "{}" in section "{}" in config file'.format(key, section))
 
 def check_python_version():
-    if version_info <= (3, 0):
-        my_logger.log(FATAL, 'The script needs at least python 3.0')
+    if version_info <= (3, 7):
+        my_logger.log(FATAL, 'The script needs at least python 3.7')
