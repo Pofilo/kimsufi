@@ -30,7 +30,7 @@ my_logger = Logger()
 def signal_handler(signal, frame):
     global running
     running = False
-    my_logger.log(DEBUG, 'Ending signal handled, ending the script...')
+    my_logger.log(INFO, 'Ending signal handled, ending the script...')
     
 def main():
     my_logger.log(INFO, '--------------------')
@@ -77,7 +77,7 @@ def main():
                 if not server_found:
                     my_logger.log(DEBUG, 'No server available')
                     if last_status:
-                        my_logger.log(DEBUG, 'Server not available anymore')
+                        my_logger.log(INFO, 'Server not available anymore')
                         notifications.send_notifications(config, False)
                         last_status = False
             else:
