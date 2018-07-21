@@ -43,6 +43,11 @@ You can [find here](https://git.pofilo.fr/pofilo/kimsufi/src/branch/master/doc/n
     + Specify the path of the configuration file (relative to `kimsufi/src` or absolute)
     + Default value is `../config/kimsufi.conf`
 
+### Testing configuration
+
+It would be too bad to not be notified because of a bad configuration.
+To test it, in your configuration file, you can change your `API_URL` with `https://git.pofilo.fr/pofilo/kimsufi/raw/branch/master/doc/example-availability-file.json` (this is the file `example-availability-file.json` in `doc/`). In this file, the server `160sk2` is available in the zone `sgp`. If you start the script (`python3.7 kimsufi.py`), you should receive notifications by the notifiers you configured.
+
 ### Adding notifier
 
 You can hack the script and add notifiers in the file `notifications.py`. Simply create a new function (in parameter, you can have the config and the boolean meaning if the server is found or not) and call it into `send_notifications(config, found)`, modify the configuration file if needed, et voilà!
