@@ -45,7 +45,7 @@ def open_and_load_config(args):
         config_path = args.config_path
     else:
         config_path = DEFAULT_CONFIG_PATH
-    config = configparser.SafeConfigParser()
+    config = configparser.ConfigParser()
 
     if os.path.isfile(config_path):
         try:
