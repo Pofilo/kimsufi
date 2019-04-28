@@ -1,99 +1,120 @@
-{
-    "answer": {
-        "__class": "dedicatedType:dedicatedAvailability2",
-        "availability": [{
-            "__class": "dedicatedType:dedicatedAvailability2Struct",
-            "displayMetazones": 0,
-            "reference": "160sk2",
-            "metaZones": [{
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "1H-low",
-                "zone": "apac"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
+[
+    {
+        "hardware": "1623hardzone1",
+        "region": "europe",
+        "datacenters": [
+            {
+                "availability": "72H",
+                "datacenter": "default"
+            },
+            {
+                "availability": "72H",
+                "datacenter": "gra"
+            },
+            {
+                "datacenter": "sbg",
+                "availability": "72H"
+            },
+            {
+                "availability": "72H",
+                "datacenter": "rbx"
+            },
+            {
                 "availability": "unavailable",
-                "zone": "fr"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
+                "datacenter": "waw"
+            },
+            {
+                "datacenter": "fra",
+                "availability": "unavailable"
+            },
+            {
                 "availability": "unavailable",
-                "zone": "centralEurope"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "europe"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "us"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "westernEurope"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "northAmerica"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "hardzone"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "canada"
-            }],
-            "zones": [{
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "fra"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "syd"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "sbg"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "vin"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "rbx"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "bhs"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "hil"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "gra"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "waw"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "rbx-hz"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "unavailable",
-                "zone": "lon"
-            }, {
-                "__class": "dedicatedType:dedicatedAvailability2ZoneStruct",
-                "availability": "1H-low",
-                "zone": "sgp"
-            }]
-        }]
+                "datacenter": "lon"
+            }
+        ]
     },
-    "version": "1.0",
-    "error": null,
-    "id": 0
-}
+    {
+        "datacenters": [
+            {
+                "availability": "unavailable",
+                "datacenter": "vin"
+            },
+            {
+                "datacenter": "hil",
+                "availability": "unavailable"
+            },
+            {
+                "datacenter": "bhs",
+                "availability": "unavailable"
+            }
+        ],
+        "region": "northAmerica",
+        "hardware": "1623hardzone1"
+    },
+    {
+        "region": "apac",
+        "datacenters": [
+            {
+                "availability": "unavailable",
+                "datacenter": "sgp"
+            },
+            {
+                "datacenter": "syd",
+                "availability": "unavailable"
+            }
+        ],
+        "hardware": "1623hardzone1"
+    },
+    {
+        "region": "europe",
+        "datacenters": [
+            {
+                "availability": "72H",
+                "datacenter": "default"
+            },
+            {
+                "availability": "72H",
+                "datacenter": "gra"
+            },
+            {
+                "availability": "unavailable",
+                "datacenter": "sbg"
+            },
+            {
+                "availability": "72H",
+                "datacenter": "rbx"
+            },
+            {
+                "availability": "unavailable",
+                "datacenter": "waw"
+            },
+            {
+                "datacenter": "fra",
+                "availability": "unavailable"
+            },
+            {
+                "availability": "unavailable",
+                "datacenter": "lon"
+            }
+        ],
+        "hardware": "1623hardzone2"
+    },
+    {
+        "hardware": "1623hardzone2",
+        "datacenters": [
+            {
+                "datacenter": "vin",
+                "availability": "unavailable"
+            },
+            {
+                "datacenter": "hil",
+                "availability": "unavailable"
+            },
+            {
+                "availability": "unavailable",
+                "datacenter": "bhs"
+            }
+        ],
+        "region": "northAmerica"
+    }
+]

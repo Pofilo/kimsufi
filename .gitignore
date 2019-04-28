@@ -21,12 +21,15 @@ eggs/
 .eggs/
 lib/
 lib64/
+lib64*
 parts/
 sdist/
 var/
 *.egg-info/
 .installed.cfg
 *.egg
+pyvenv.cfg
+bin/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

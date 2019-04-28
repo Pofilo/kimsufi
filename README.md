@@ -6,7 +6,6 @@ Sends an alert when your Kimsufi server is available.
 ## Requirements
 
 + The script uses **python 3.7**
-+ `pip install -r requirements.txt`
 
 ## Purpose
 
@@ -32,6 +31,9 @@ You can [find here](https://git.pofilo.fr/pofilo/kimsufi/src/branch/master/doc/n
 
 + Download the last stable version [available here](https://git.pofilo.fr/pofilo/kimsufi/releases)
 + `cd kimsufi`
++ Create virtual environment: `python3.7 -m venv .`
++ Source it: `source bin/activate`
++ Install dependencies: `pip install -r requirements.txt`
 + `cp config/kimsufi.sample.conf config/kimsufi.conf`
 + Edit *config/kimsufi.conf*
 + `cd src`
@@ -46,7 +48,7 @@ You can [find here](https://git.pofilo.fr/pofilo/kimsufi/src/branch/master/doc/n
 ### Testing configuration
 
 It would be too bad to not be notified because of a bad configuration.
-To test it, in your configuration file, you can change your `API_URL` with `https://git.pofilo.fr/pofilo/kimsufi/raw/branch/master/doc/example-availability-file.json` (this is the file `example-availability-file.json` in `doc/`). In this file, the server `160sk2` is available in the zone `sgp`. If you start the script (`python3.7 kimsufi.py`), you should receive notifications by the notifiers you configured.
+To test it, in your configuration file, you can change your `API_URL` with `https://git.pofilo.fr/pofilo/kimsufi/raw/branch/master/doc/example-availability-file.json` (this is the file `example-availability-file.json` in `doc/`). In this file, the server `1623hardzone1` is available in the zone `sbg`. If you start the script (`python3.7 kimsufi.py`), you should receive notifications by the notifiers you configured.
 
 ### Adding notifier
 

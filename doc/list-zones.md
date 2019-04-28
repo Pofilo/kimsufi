@@ -1,20 +1,21 @@
 # List of zones of Kimsufi's servers
-List extracted [from the API](https://ws.ovh.com/dedicated/r2/ws.dispatcher/getAvailability2) and [the list of OVH datacenters](https://www.ovh.com/world/about-us/datacenters.xml) ([let us know](https://git.pofilo.fr/pofilo/kimsufi/issues) if you are aware of an API or an easier way).
+List extracted [from the API](https://api.ovh.com/console/#/dedicated/server/availabilities#GET) and [the list of OVH datacenters](https://www.ovh.com/world/about-us/datacenters.xml) ([let us know](https://git.pofilo.fr/pofilo/kimsufi/issues) if you are aware of an API or an easier way).
 
 | English Name | French Name |Reference  |
 |--------------|-------------|-----------|
-| Frankfurt    | Francfort   | fra       |
-| Sydney       | Sydney      | syd       |
-| Strasbourg   | Strasbourg  | sbg       |
-| *Vint Hill ?*|*Vint Hill ?*| vin       |
-| Roubaix      | Roubaix     | rbx       |
 | Beauharnois  | Beauharnois | bhs       |
-| *Vint Hill ?*|*Vint Hill ?*| hil       |
+| *?*          | *?*         | default   |
+| Frankfurt    | Francfort   | fra       |
 | Gravelines   | Gravelines  | gra       |
-| Warsaw       | Varsovie    | waw       |
-| *Roubaix ?*  | *Roubaix ?* | rbx-hz    |
+| *Vint Hill ?*|*Vint Hill ?*| hil       |
 | London       | Londres     | lon       |
+| Roubaix      | Roubaix     | rbx       |
+| *Roubaix ?*  | *Roubaix ?* | rbx-hz    |
+| Strasbourg   | Strasbourg  | sbg       |
 | Singapore    | Singapour   | sgp       |
+| Sydney       | Sydney      | syd       |
+| *Vint Hill ?*|*Vint Hill ?*| vin       |
+| Warsaw       | Varsovie    | waw       |
 
 # Not up-to-date ?
 
