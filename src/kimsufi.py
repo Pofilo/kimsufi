@@ -64,9 +64,9 @@ def main():
             response = http1.get(api_url)
             if response.status == 200:
                 struct = json.loads(response.body)
-                for item in struct['answer']['availability']:
-                    zones = [z['zone'] for z in item['zones'] if z['availability'] not in ('unavailable', 'unknown')]
-                    if set(zones).intersection(zones_desired) and item['reference'] == id_server:
+                for item in struct:
+                    zones = [z['datacenter'] for z in item['datacenters'] if z['availability'] not in ('unavailable', 'unknown')]
+                    if set(zones).intersection(zones_desired) and item['hardware'] == id_server:
                         server_found = True
                         if not last_status:
                             my_logger.log(INFO, 'Found available server, sending notifications...')
@@ -74,6 +74,8 @@ def main():
                             last_status = True
                         else:
                             my_logger.log(DEBUG, 'Notification already sent, passing...')
+                        # Do not iterate on other items as we already found an available server
+                        break
                 if not server_found:
                     my_logger.log(DEBUG, 'No server available')
                     if last_status:
