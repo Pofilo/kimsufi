@@ -6,7 +6,6 @@ Sends an alert when your Kimsufi server is available.
 ## Requirements
 
 + The script uses **python 3.7**
-+ `pip install -r requirements.txt`
 
 ## Purpose
 
@@ -32,6 +31,9 @@ You can [find here](https://git.pofilo.fr/pofilo/kimsufi/src/branch/master/doc/n
 
 + Download the last stable version [available here](https://git.pofilo.fr/pofilo/kimsufi/releases)
 + `cd kimsufi`
++ Create virtual environment: `python3.7 -m venv .`
++ Source it: `source bin/activate`
++ Install dependencies: `pip install -r requirements.txt`
 + `cp config/kimsufi.sample.conf config/kimsufi.conf`
 + Edit *config/kimsufi.conf*
 + `cd src`
